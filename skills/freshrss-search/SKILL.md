@@ -77,9 +77,15 @@ Be generous-but-honest:
 
 If the user's topic is vague or could mean multiple things, lean toward broader inclusion and let them refine.
 
-### 4. Survey
+### 4. Survey and print stats header
 
-Print `len(matches)` and a one-line note on the date range of matches and which feeds they came from. This sets expectations and tells you which mode to use.
+Count your matches and the distinct feeds they came from. Run:
+
+```bash
+python skills/freshrss-digest/scripts/stats_header.py --articles {N} --feeds {M} "search · {topic}"
+```
+
+Include this output verbatim at the top of your response, then add a one-line note on the date range and which feeds contributed. This sets expectations and tells you which mode to use.
 
 ### 5. Pick the mode and write the results
 

@@ -77,6 +77,14 @@ python skills/freshrss-digest/scripts/process_articles.py \
 The script prints a per-feed post count survey to stderr — check it to see
 who's been active before writing.
 
+### 4b. Print the stats header
+
+```bash
+python skills/freshrss-digest/scripts/stats_header.py /tmp/freshrss_category.json "category · {category} · {timeframe}"
+```
+
+Include this output verbatim at the top of your response.
+
 ### 5. Read the articles
 
 ```bash

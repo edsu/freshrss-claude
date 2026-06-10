@@ -58,19 +58,28 @@ The result will likely exceed the inline cap and be saved to a file. Note the pa
 python skills/freshrss-digest/scripts/process_articles.py "$path" "$cutoff" > /tmp/freshrss_filtered.json
 ```
 
-### 4. List feeds
+### 4. Print the stats header
+
+```bash
+python skills/freshrss-digest/scripts/stats_header.py /tmp/freshrss_filtered.json "subscriptions · {timeframe}"
+```
+
+Include this output verbatim at the top of your response.
+
+### 5. List feeds
 
 ```bash
 python skills/freshrss-subscriptions/scripts/list_feeds.py /tmp/freshrss_filtered.json
 ```
 
-This prints each feed sorted by unread count, with up to 2 sample article titles
-and URLs per feed. Pass `--sample 0` to show counts only.
+This prints each feed sorted by unread count, with a proportional bar chart and
+up to 2 sample article titles per feed. Pass `--sample 0` for counts only,
+`--no-bars` to suppress the bars.
 
-### 5. Present the results
+### 6. Present the results
 
-Format the output as a clean list. Use the feed names as section labels or a
-simple table. Keep it scannable — the goal is a quick overview, not a digest.
+Include the `list_feeds.py` output verbatim after the stats header. Keep it
+scannable — the goal is a quick overview, not a digest.
 
 If `len(all_articles) > len(recent)` (process_articles.py stderr shows
 "filtered from N"), add a one-line note that the counts only reflect articles

@@ -89,6 +89,14 @@ Use the survey output to:
 - Spot dense single-feed clusters early
 - Confirm whether `ot` leaked older articles (stderr from process_articles.py shows "filtered from N")
 
+### 4. Print the stats header
+
+```bash
+python skills/freshrss-digest/scripts/stats_header.py /tmp/freshrss_filtered.json "digest · {timeframe}"
+```
+
+Include this output verbatim at the top of your response, before the digest.
+
 ### 6. Pick the mode and write the digest
 
 **Every item mentioned by name must include its URL via inline markdown links.**
