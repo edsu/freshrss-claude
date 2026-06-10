@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Print articles from People feeds, grouped by person with clean display names.
+"""Print articles grouped by feed with clean display names.
 
-Usage: show_people.py <filtered_json_path>
+Usage: show_feeds.py <filtered_json_path>
 
-Outputs one section per person, sorted by post count descending, with full
-summaries. Designed to be read before writing a person-centric narrative.
+Outputs one section per feed, sorted by post count descending, with full
+summaries. Designed to be read before writing a category summary.
 """
 import json
 import re
