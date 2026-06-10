@@ -1,12 +1,12 @@
-# freshrss-cowork
+# freshrss-claude
 
 > **Experimental.** This is a personal project for exploring MCP server development and Claude plugin/skill building. It works, but expect rough edges and breaking changes.
 
-A Claude Cowork plugin that connects Claude to your [FreshRSS](https://freshrss.org/) feeds. It bundles an MCP server (wrapping the FreshRSS Google Reader API) and four skills for digesting, searching, and catching up on your subscriptions.
+A Claude Code plugin that connects Claude to your [FreshRSS](https://freshrss.org/) feeds. It bundles an MCP server (wrapping the FreshRSS Google Reader API) and four skills for digesting, searching, and catching up on your subscriptions.
 
 Token-optimized: the server returns only essential fields with configurable summary truncation, achieving ~90% reduction vs raw RSS XML payloads.
 
-The MCP server (`src/freshrss_mcp/`) is based on [ChrisLAS/freshrss-mcp](https://github.com/ChrisLAS/freshrss-mcp), originally built for Streamable HTTP transport and the OpenClaw gateway. This repo restructures it as a Cowork plugin (stdio transport, plugin manifest, bundled skills).
+The MCP server (`src/freshrss_mcp/`) is based on [ChrisLAS/freshrss-mcp](https://github.com/ChrisLAS/freshrss-mcp), originally built for Streamable HTTP transport and the OpenClaw gateway. This repo restructures it as a Claude Code plugin (stdio transport, plugin manifest, bundled skills).
 
 ---
 
@@ -14,17 +14,35 @@ The MCP server (`src/freshrss_mcp/`) is based on [ChrisLAS/freshrss-mcp](https:/
 
 ### Prerequisites
 
-- [`uv`](https://docs.astral.sh/uv/getting-started/installation/) (Python 3.12+) must be installed on the machine running Cowork — the plugin invokes `uv run freshrss-mcp` to start the bundled MCP server. `uv` is not bundled with Cowork, so install it first if you don't already have it.
+[`uv`](https://docs.astral.sh/uv/getting-started/installation/) (Python 3.12+) must be installed — the plugin uses `uv run freshrss-mcp` to start the bundled MCP server.
 
 ### Steps
 
-1. Add this repo as a plugin in Cowork (or Claude Code: `claude plugin install` / via a marketplace entry pointing at this repo).
-2. When prompted, enter your FreshRSS connection details:
-   - **FreshRSS URL** — base URL of your instance, e.g. `https://freshrss.example.com`
-   - **FreshRSS username**
-   - **FreshRSS API password** — from FreshRSS under Settings → Profile → API Management (this is a separate password from your login password unless you've set them the same)
+**1. Add this repo as a marketplace and install the plugin:**
 
-These are stored securely (the password goes to the system keychain) and passed to the bundled MCP server, which Cowork starts automatically — there's nothing to run yourself, beyond installing `uv`.
+```bash
+claude plugin marketplace add https://github.com/edsu/freshrss-claude
+claude plugin install freshrss-claude
+```
+
+**2. Configure your FreshRSS credentials** by running this inside Claude Code:
+
+```
+/plugin configure freshrss-claude@freshrss-claude-marketplace
+```
+
+You'll be prompted for:
+- **FreshRSS URL** — base URL of your instance, e.g. `https://freshrss.example.com`
+- **FreshRSS username**
+- **FreshRSS API password** — from FreshRSS under Settings → Profile → API Management (separate from your login password)
+
+**3. Reload plugins:**
+
+```
+/reload-plugins
+```
+
+The MCP server starts automatically from that point — there's nothing else to run.
 
 ---
 
@@ -62,7 +80,7 @@ The bundled server exposes these tools:
 
 ## Architecture Notes
 
-- **Transport**: stdio. Cowork/Claude Code spawn the bundled server as a subprocess via `.mcp.json`.
+- **Transport**: stdio. Claude Code spawns the bundled server as a subprocess via `.mcp.json`.
 - **Auth**: Lazy authentication — the FreshRSS client authenticates on the first API call, not at startup.
 - **Error handling**: Every tool catches all exceptions and returns `"Error: ..."` strings. The MCP protocol never sees uncaught exceptions.
 - **Config**: pydantic-settings `BaseSettings` with `SecretStr` for the password, sourced from the plugin's `userConfig`.
@@ -72,8 +90,8 @@ The bundled server exposes these tools:
 ### Project Structure
 
 ```
-.claude-plugin/plugin.json   — Cowork plugin manifest (userConfig: URL, username, password)
-.mcp.json                     — bundled MCP server definition (stdio)
+.claude-plugin/plugin.json   — plugin manifest (userConfig: URL, username, password)
+.mcp.json                    — bundled MCP server definition (stdio)
 skills/
   freshrss-digest/
   freshrss-search/
@@ -95,8 +113,8 @@ tests/
 ## Development
 
 ```bash
-git clone https://github.com/edsu/freshrss-cowork.git
-cd freshrss-cowork
+git clone https://github.com/edsu/freshrss-claude.git
+cd freshrss-claude
 uv sync
 uv run pytest -v
 

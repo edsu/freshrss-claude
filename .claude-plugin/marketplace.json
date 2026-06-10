@@ -1,13 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-marketplace.json",
-  "name": "freshrss-cowork-marketplace",
+  "name": "freshrss-claude-marketplace",
   "owner": {
     "name": "Ed Summers",
     "email": "ehs@pobox.com"
   },
   "plugins": [
     {
-      "name": "freshrss-cowork",
+      "name": "freshrss-claude",
       "source": "./",
       "description": "Read, search, and digest your FreshRSS feeds — digests, topic search, a people-centric catch-up, and a subscriptions overview, backed by a bundled FreshRSS MCP server."
     }

@@ -1,7 +1,7 @@
 [project]
-name = "freshrss-cowork"
+name = "freshrss-claude"
 version = "0.3.0"
-description = "FreshRSS MCP server bundled as a Claude Cowork plugin (stdio transport)"
+description = "FreshRSS MCP server bundled as a Claude Code plugin (stdio transport)"
 readme = "README.md"
 requires-python = ">=3.12,<4"
 dependencies = [

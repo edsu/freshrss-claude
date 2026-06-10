@@ -1,11 +1,11 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
-  "name": "freshrss-cowork",
-  "displayName": "FreshRSS for Cowork",
+  "name": "freshrss-claude",
+  "displayName": "FreshRSS for Claude",
   "version": "0.3.0",
   "description": "Read, search, and digest your FreshRSS feeds — digests, topic search, a people-centric catch-up, and a subscriptions overview, backed by a bundled FreshRSS MCP server.",
-  "homepage": "https://github.com/edsu/freshrss-cowork",
-  "repository": "https://github.com/edsu/freshrss-cowork",
+  "homepage": "https://github.com/edsu/freshrss-claude",
+  "repository": "https://github.com/edsu/freshrss-claude",
   "license": "MIT",
   "keywords": ["freshrss", "rss", "feeds", "digest", "news"],
   "userConfig": {

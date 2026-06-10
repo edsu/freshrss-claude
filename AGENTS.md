@@ -4,9 +4,9 @@ This project uses **bd** (beads) for issue tracking. Run `bd onboard` to get sta
 
 ## What This Project Is
 
-**freshrss-cowork** — a Claude Cowork plugin for FreshRSS. It bundles an MCP server (wrapping the FreshRSS Google Reader API, exposing 10 tools for RSS feed management) plus four skills (`freshrss-digest`, `freshrss-search`, `freshrss-people`, `freshrss-subscriptions`) that drive it.
+**freshrss-claude** — a Claude Cowork plugin for FreshRSS. It bundles an MCP server (wrapping the FreshRSS Google Reader API, exposing 10 tools for RSS feed management) plus four skills (`freshrss-digest`, `freshrss-search`, `freshrss-category`, `freshrss-subscriptions`) that drive it.
 
-**Transport**: stdio. Cowork/Claude Code spawn the server as a subprocess via `.mcp.json`, passing `FRESHRSS_URL`/`FRESHRSS_USERNAME`/`FRESHRSS_PASSWORD` from the plugin's `userConfig` (declared in `.claude-plugin/plugin.json`).
+**Transport**: stdio. Claude Code spawns the server as a subprocess via `.mcp.json`, passing `FRESHRSS_URL`/`FRESHRSS_USERNAME`/`FRESHRSS_PASSWORD` from the plugin's `userConfig` (declared in `.claude-plugin/plugin.json`).
 
 **Runtime**: Python 3.12+, managed by `uv`.
 
@@ -22,7 +22,7 @@ freshrss-mcp/
   skills/
     freshrss-digest/          # /freshrss-digest [timeframe]
     freshrss-search/          # /freshrss-search <topic>
-    freshrss-people/          # /freshrss-people [timeframe]
+    freshrss-category/          # /freshrss-category [timeframe]
     freshrss-subscriptions/   # /freshrss-subscriptions [timeframe]
   src/freshrss_mcp/
     server.py             # FastMCP entry point (stdio transport)
