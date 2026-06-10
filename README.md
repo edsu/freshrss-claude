@@ -18,25 +18,35 @@ The MCP server (`src/freshrss_mcp/`) is based on [ChrisLAS/freshrss-mcp](https:/
 
 ### Steps
 
-**1. Add this repo as a marketplace and install the plugin:**
+**1. Register this GitHub repo as a plugin marketplace** (run in your terminal):
 
 ```bash
 claude plugin marketplace add https://github.com/edsu/freshrss-claude
+```
+
+This tells Claude Code to treat this repository as a source of plugins. Claude Code fetches the plugin manifest from the repo and assigns the marketplace the name `freshrss-claude-marketplace`.
+
+**2. Install the plugin** (run in your terminal):
+
+```bash
 claude plugin install freshrss-claude
 ```
 
-**2. Configure your FreshRSS credentials** by running this inside Claude Code:
+This installs the `freshrss-claude` plugin from the marketplace you just registered.
+
+**3. Configure your FreshRSS credentials** (run inside Claude Code):
 
 ```
 /plugin configure freshrss-claude@freshrss-claude-marketplace
 ```
 
-You'll be prompted for:
+The `@freshrss-claude-marketplace` suffix tells Claude Code which marketplace the plugin came from — this disambiguates in case you have multiple marketplaces with plugins of the same name. You'll be prompted for:
+
 - **FreshRSS URL** — base URL of your instance, e.g. `https://freshrss.example.com`
 - **FreshRSS username**
-- **FreshRSS API password** — from FreshRSS under Settings → Profile → API Management (separate from your login password)
+- **FreshRSS API password** — from FreshRSS under Settings → Profile → API Management (this is separate from your login password)
 
-**3. Reload plugins:**
+**4. Reload plugins** (run inside Claude Code):
 
 ```
 /reload-plugins
@@ -56,6 +66,33 @@ The `skills/` directory ships four skills that drive the bundled `freshrss` MCP 
 - **`freshrss-subscriptions`** — `/freshrss-subscriptions [timeframe]` lists which feeds have unread articles in a window, with counts and sample titles, sorted by volume.
 
 All four skills are installed automatically with the plugin — no separate symlinking step.
+
+---
+
+## Example: summarize the last two days
+
+Inside Claude Code, run:
+
+```
+/freshrss-digest 2d
+```
+
+Claude fetches your unread articles from the past 48 hours and produces a digest. With fewer than 25 posts it renders a grouped reading-queue index (every article linked); with more it switches to a curated TL;DR that highlights roughly a third of them by theme and drops filler:
+
+```
+### Technology
+- **New LLM benchmarks published** — Stanford HELM adds five new tasks targeting reasoning and long-context recall. ([link](…)) — *AI Weirdness*
+- **Firefox 128 ships** — Tab Groups and a reworked reader mode land in stable. ([link](…)) — *Mozilla Hacks*
+
+### Politics
+- Local city council approved the transit funding amendment after two hours of public comment. ([link](…)) — *DCist*
+
+…
+
+Mark all 47 articles in this window as read in FreshRSS? (yes/no)
+```
+
+After the digest Claude offers to mark everything in that window as read in FreshRSS.
 
 ---
 
