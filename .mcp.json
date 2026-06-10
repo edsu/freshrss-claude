@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "freshrss": {
+      "command": "uv",
+      "args": ["run", "--directory", "${CLAUDE_PLUGIN_ROOT}", "freshrss-mcp"],
+      "env": {
+        "FRESHRSS_URL": "${user_config.freshrss_url}",
+        "FRESHRSS_USERNAME": "${user_config.freshrss_username}",
+        "FRESHRSS_PASSWORD": "${user_config.freshrss_password}"
+      }
+    }
+  }
+}

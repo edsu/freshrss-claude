@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "freshrss-cowork",
+  "displayName": "FreshRSS for Cowork",
+  "version": "0.3.0",
+  "description": "Read, search, and digest your FreshRSS feeds — digests, topic search, a people-centric catch-up, and a subscriptions overview, backed by a bundled FreshRSS MCP server.",
+  "homepage": "https://github.com/edsu/freshrss-cowork",
+  "repository": "https://github.com/edsu/freshrss-cowork",
+  "license": "MIT",
+  "keywords": ["freshrss", "rss", "feeds", "digest", "news"],
+  "userConfig": {
+    "freshrss_url": {
+      "type": "string",
+      "title": "FreshRSS URL",
+      "description": "Base URL of your FreshRSS instance, e.g. https://freshrss.example.com",
+      "required": true
+    },
+    "freshrss_username": {
+      "type": "string",
+      "title": "FreshRSS username",
+      "description": "Your FreshRSS login username",
+      "required": true
+    },
+    "freshrss_password": {
+      "type": "string",
+      "title": "FreshRSS API password",
+      "description": "Your FreshRSS API password (Settings > Profile > API Management in FreshRSS)",
+      "sensitive": true,
+      "required": true
+    }
+  }
+}
